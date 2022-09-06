@@ -36,12 +36,13 @@ IO.on('connection', (socket) => {
         socket.join(room);
     });
 
-    socket.on('message', ({ room, messageText }) => {
-        db.query('INSERT INTO chats (message, room, created) VALUES (?, ?, ?)', [
+    socket.on('message', async ({ room, messageText }) => {
+        await db.query('INSERT INTO chats (message, room, created) VALUES (?, ?, ?)', [
             messageText, 
             room,
             new Date()
         ])
+        
         IO.to(room).emit('message', messageText)
     });
 })
