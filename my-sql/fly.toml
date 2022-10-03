@@ -1,0 +1,22 @@
+app = "my-sql"
+kill_signal = "SIGINT"
+kill_timeout = 5
+
+[mounts]
+  source="mysqldata"
+  destination="/data"
+
+[env]
+  MYSQL_DATABASE = "express_mysql_sequelize_development"
+  MYSQL_USER = "dbuser"
+  MYSQL_PASSWORD = "password"
+
+[build]
+  image = "mysql:5.7"
+
+[experimental]
+  cmd = [
+    "--default-authentication-plugin", 
+    "--datadir", 
+    "/data/mysql"
+  ]

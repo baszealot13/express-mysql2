@@ -11,6 +11,7 @@ class RouteProtection {
 
             return next()
         } catch (error) {
+            console.log('RouteProtection.verify: ', error);
             res.status(401).json({ message: 'Unauthoriz' }).end()
         }
     }
